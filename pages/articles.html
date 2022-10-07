@@ -29,7 +29,7 @@
     <div id="SearchTextBox">
       <div class="input-group">
       <span class="input-group-text"><i class="fas fa-search"></i></span>
-      <input type="text" id="SearchText"  placeholder="Search Articles" class="form-control" />     
+      <input onkeyup="searchFunction(this)" type="text" id="SearchText"  placeholder="Search Articles" class="form-control" />     
     </div>  
     </div>
 </nav>
@@ -91,25 +91,22 @@
 
 {% block scripts %}
 <script>
-  const SearchTextBox = document.getElementById('SearchTextBox');
-  const SearchTerms = ['apple','dog'];
-
-  SearchTextBox.addEventListener('keyup', (e) => {
-    const SearchText = e.target.value.toLowerCase();
-    SearchTerms.forEach((term) => {
-      if (term.includes(SearchText)) {
-        // render suggestions dropdown with the matching terms
-        SearchTextBox.innerHTML = `
-          <div class="input-group">
-            <span class="input-group-text"><i class="fas fa-search"></i></span>
-            <input type="text" id="SearchText"  placeholder="Search Articles" class="form-control" />     
-          </div>  
-        `;
-
-        
-
+function searchFunction(element) {
+      var input, filter, tr, td, i, txtValue;
+      input = element.value;
+      filter = input.toUpperCase();
+      tr = document.getElementsByClassName('card card-blog card-plain');
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("h4")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }          
+        }
       }
-    });
-  });
+    }
 </script>
 {% endblock %}
