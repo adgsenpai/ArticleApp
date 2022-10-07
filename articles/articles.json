@@ -1,0 +1,16 @@
+{
+    "articles": [
+        {
+            "id": 1,
+            "filename": "dolbyatmos.md",
+            "Img": "/static/img/wp8869072.webp",
+            "headline": "Linux Dolby Atmos",
+            "Category": "Sound Engineering",
+            "summary": "A guide to setting up Dolby Atmos on Linux",
+            "URL": "/articles/1",
+            "Date": "2022/06/10",
+            "AuthorImg":"https://i1.rgstatic.net/ii/profile.image/1147267046219780-1650541187059_Q128/Ashlin-Govindasamy.jpg",
+            "Author":"Ashlin Darius Govindasamy"
+        } 
+    ]
+}

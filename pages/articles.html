@@ -1,0 +1,115 @@
+
+
+
+{% extends 'base.html'%}
+{%block metadata%}
+<meta name="description" content="this is a page that displays Ashlin Darius Govindasamy's Articles">
+<meta name="keywords" content="Ashlin Darius Govindasamy, Articles">
+<meta name="author" content="Ashlin Darius Govindasamy">
+<meta name="image" content="./static/img/administration-articles-bank-black-and-white.jpg">
+<meta property="og:title" content="Articles">
+<meta property="og:description" content="this is a page that displays Ashlin Darius Govindasamy's Articles">
+<meta property="og:image" content="./static/img/administration-articles-bank-black-and-white.jpg">
+<meta property="og:site_name" content="ADGSTUDIOS Articles">
+<meta property="og:type" content="website">
+{% endblock %}
+
+<!-- Navbar -->
+{% block navbar %}
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-white z-index-3 py-3">
+  <div class="container">
+    <a class="navbar-brand" href="/" rel="tooltip" data-placement="bottom" target="_blank">
+      {{ pagetitle }}
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- add search textbox at the right side of the navbar with hourglass icon -->
+    <div id="SearchTextBox">
+      <div class="input-group">
+      <span class="input-group-text"><i class="fas fa-search"></i></span>
+      <input type="text" id="SearchText"  placeholder="Search Articles" class="form-control" />     
+    </div>  
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  {% for article in articles %}
+  <div class="row">
+    <div class="card">
+    <div class="col-md-12">     
+      <div class="card card-blog card-plain">
+        <div class="position-relative">
+          <a class="d-block blur-shadow-image">
+            <img src="{{ article.Img }}" alt="img-blur-shadow" class="img-fluid shadow border-radius-lg">
+          </a>
+        </div>
+        <!-- render date and author name -->
+        <div class="card-body pb-0">
+          <h5 class="card-title">
+            <a href="{{ article.Url }}" target="_blank">{{ article.Title }}</a>
+          </h5>
+          <p class="card-text">
+            {{ article.Description }}
+          </p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+              <div class="avatar avatar-sm me-2">
+                <img src="{{ article.AuthorImg }}" alt="..." class="avatar-img rounded-circle">
+              </div>
+              <h6 class="mb-0 text-sm">{{ article.Author }}</h6>
+            </div>
+            <div class="text-sm">
+              <i class="far fa-clock me-1"></i>
+              {{ article.Date }}
+            </div>
+          </div>
+        <div class="card-body px-0 pt-4">
+          <p class="text-gradient text-dark text-gradient font-weight-bold text-sm text-uppercase">{{ article.Category }}</p>
+          <a >
+            <h4>
+              {{ article.headline }}
+            </h4>
+          </a>
+          <p>
+            {{ article.summary }}
+          </p>
+          <button type="button" class="btn bg-gradient-primary mt-3" onclick="window.location.href='{{ article.URL }}'">Read More</button>
+        </div>
+      </div>      
+    </div>
+  </div>
+</div>
+  {% endfor %}
+</div>
+{% endblock %}
+
+
+
+{% block scripts %}
+<script>
+  const SearchTextBox = document.getElementById('SearchTextBox');
+  const SearchTerms = ['apple','dog'];
+
+  SearchTextBox.addEventListener('keyup', (e) => {
+    const SearchText = e.target.value.toLowerCase();
+    SearchTerms.forEach((term) => {
+      if (term.includes(SearchText)) {
+        // render suggestions dropdown with the matching terms
+        SearchTextBox.innerHTML = `
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+            <input type="text" id="SearchText"  placeholder="Search Articles" class="form-control" />     
+          </div>  
+        `;
+
+        
+
+      }
+    });
+  });
+</script>
+{% endblock %}
